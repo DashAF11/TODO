@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".search"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:background="@drawable/search_outer"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+    <RelativeLayout
+        android:background="@drawable/search_inner"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+            <ImageView
+                android:layout_marginTop="4dp"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/button"
+                android:background="@drawable/back_icon"
+                android:layout_width="37dp"
+                android:layout_height="37dp"
+                android:id="@+id/back_icon"/>
+
+            <EditText
+                android:backgroundTint="@color/button"
+                android:paddingBottom="8dp"
+                android:gravity="center_vertical"
+                android:layout_toLeftOf="@+id/btn_search_cattask"
+                android:layout_toRightOf="@+id/back_icon"
+                android:id="@+id/txtsearch"
+                android:maxLength="20"
+                android:layout_gravity="center"
+                android:textSize="20dp"
+                android:textStyle="italic"
+                android:textColor="@color/button"
+                android:textColorHint="@color/button"
+                android:hint="Search..."
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <ImageView
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="15dp"
+                android:backgroundTint="@color/button"
+                android:background="@drawable/searchicon"
+                android:id="@+id/btn_search_cattask"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/r1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <android.support.v7.widget.RecyclerView
+        android:padding="6dp"
+        android:id="@+id/search_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </android.support.v7.widget.RecyclerView>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/r2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/t1"
+        android:textSize="24sp"
+        android:layout_marginTop="150dp"
+        android:layout_centerHorizontal="true"
+        android:hint="Search Result Not Found!"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>

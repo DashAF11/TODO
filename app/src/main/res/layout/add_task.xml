@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/background"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Task_list">
+
+        <RelativeLayout
+            android:id="@+id/qwe"
+            android:background="@color/mainbar"
+            android:layout_width="match_parent"
+            android:layout_height="65dp">
+
+            <ImageView
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/back_icon"
+                android:layout_width="37dp"
+                android:layout_height="37dp"
+                android:id="@+id/back_icon"/>
+
+            <ImageView
+                android:layout_marginLeft="5dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/cancle_icon"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:id="@+id/cancle"
+                android:visibility="gone"/>
+
+            <ImageView
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="55dp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/dummy"
+                android:id="@+id/dummy"
+                android:layout_width="34dp"
+                android:layout_height="34dp"/>
+
+            <EditText
+                android:id="@+id/txtcat_name"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="45dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:lines="2"
+                android:textColor="@color/white"
+                android:layout_toLeftOf="@+id/dummy"
+                android:backgroundTint="@color/mainbar"
+                android:textCursorDrawable="@color/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <ImageView
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="55dp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/edit_icon"
+                android:id="@+id/edit_catname"
+                android:layout_width="34dp"
+                android:layout_height="34dp" />
+
+            <ImageView
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/addicon"
+                android:id="@+id/add_newtask"
+                android:layout_width="34dp"
+                android:layout_height="34dp" />
+
+            <ImageView
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/saveicon"
+                android:id="@+id/save"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:visibility="gone"/>
+
+        </RelativeLayout>
+
+    <LinearLayout
+        android:layout_below="@id/qwe"
+        android:id="@+id/r1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/swiperefresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/Recyclelistview_taskList"
+            android:layout_marginTop="10dp"
+            android:padding="6dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"/>
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:layout_marginTop="5dp"
+        android:id="@+id/r2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/t1"
+            android:textSize="24sp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_vertical"
+            android:hint="Task List is Empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/t1"
+            android:id="@+id/t2"
+            android:layout_marginLeft="130dp"
+            android:background="@drawable/addicon"
+            android:backgroundTint="@color/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:id="@+id/t3"
+            android:layout_below="@+id/t1"
+            android:layout_toRightOf="@+id/t2"
+            android:textSize="18sp"
+            android:layout_centerHorizontal="true"
+            android:hint="Add Task"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

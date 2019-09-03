@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="65dp"
+    android:padding="5dp"
+    android:background="@drawable/recycle_background_layout"
+    android:id="@+id/btnrelative_categoryonclick"
+    android:layout_marginBottom="1dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cat_id"
+        android:visibility="gone"/>
+
+    <TextView
+        android:layout_toLeftOf="@+id/fav"
+        android:layout_alignParentLeft="true"
+        android:textSize="17sp"
+        android:textColor="@color/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cat_name"
+        android:textStyle="bold"/>
+
+     <ImageView
+         android:layout_centerVertical="true"
+         android:layout_alignParentRight="true"
+         android:layout_marginRight="40dp"
+         android:layout_width="25dp"
+         android:layout_height="25dp"
+         android:src="@drawable/notlike"
+         android:id="@+id/fav" />
+
+     <ImageView
+         android:layout_toLeftOf="@+id/fav"
+         android:layout_centerVertical="true"
+         android:layout_alignParentRight="true"
+         android:id="@+id/cat_del"
+         android:layout_width="34dp"
+         android:layout_height="34dp"
+         android:background="@drawable/deleteicon"/>
+
+     <TextView
+         android:layout_alignParentLeft="true"
+         android:layout_alignParentBottom="true"
+         android:id="@+id/count_task"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@id/t"
+        android:layout_toRightOf="@+id/count_task"
+        android:layout_alignParentBottom="true"
+        android:text=" Tasks, "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_toRightOf="@+id/t"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/count_pendingtask"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_toRightOf="@+id/count_pendingtask"
+        android:layout_alignParentBottom="true"
+        android:text=" Pending Tasks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

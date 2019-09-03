@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="75dp"
+    android:layout_marginBottom="1dp"
+    android:background="@drawable/recycle_background_layout"
+    android:padding="6dp"
+    android:id="@+id/btnlayout_taskClick">
+
+    <TextView
+        android:visibility="invisible"
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/tvtask_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/tvtask_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@+id/chkstatus"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:lines="2"/>
+
+        <TextView
+            android:id="@+id/tvtask_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:visibility="invisible" />
+
+        <TextView
+            android:layout_alignParentBottom="true"
+            android:textStyle="bold"
+            android:layout_marginTop="7dp"
+            android:gravity="center_vertical"
+            android:id="@+id/tvTASK_DATE"
+            android:textColor="@color/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@+id/tvTASK_DATE"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="40dp"
+            android:layout_alignParentBottom="true"
+            android:textStyle="bold"
+            android:id="@+id/tvTASK_TIME"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/button"/>
+
+
+    <CheckBox
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="40dp"
+        android:id="@+id/chkstatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/tabs"
+        android:buttonTint="@color/tabs"
+        android:scaleX="1.5"
+        android:scaleY="1.5"/>
+
+        <ImageView
+            android:backgroundTint="@color/button"
+            android:layout_centerVertical="true"
+            android:id="@+id/btn_delete_taskicon"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/deleteicon"
+            android:layout_width="34dp"
+            android:layout_height="34dp" />
+
+</RelativeLayout>

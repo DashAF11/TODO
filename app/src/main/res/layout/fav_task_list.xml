@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="65dp"
+    android:background="@drawable/recycle_background_layout"
+    android:padding="5dp"
+    android:id="@+id/btnrelative_categoryonclick2"
+    android:layout_marginBottom="1dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvid"
+        android:visibility="gone"/>
+
+    <TextView
+        android:layout_alignParentLeft="true"
+        android:textColor="@color/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:layout_toLeftOf="@+id/fav"
+        android:id="@+id/tvname"
+        android:textSize="17sp"/>
+
+    <TextView
+        android:id="@+id/count_catfav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true" />
+
+    <TextView
+        android:id="@+id/taskcount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/count_catfav"
+        android:text="  Tasks, " />
+
+    <TextView
+        android:layout_toRightOf="@+id/taskcount"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/count_pendingtaskfav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_toRightOf="@+id/count_pendingtaskfav"
+        android:layout_alignParentBottom="true"
+        android:text="  Pending Tasks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="40dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/like"
+        android:layout_centerVertical="true"
+        android:id="@+id/fav" />
+
+    <ImageView
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:id="@+id/cat_del"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:background="@drawable/deleteicon"/>
+
+</RelativeLayout>

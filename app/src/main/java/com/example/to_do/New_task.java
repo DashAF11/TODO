@@ -1,21 +1,25 @@
 package com.example.to_do;
 
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -25,12 +29,15 @@ import java.util.Calendar;
 public class New_task extends Activity
 {
     DatabaseHelper mydb;
-    ImageView btnsave,btnDatePicker, btnTimePicker,btnback;
-    String ref,mytime,status="notdone";
+    ImageView btnsave,btnDatePicker, btnTimePicker;
+    String catid,mytime,status="notdone", pref="low", catname;
     private int mYear, mMonth, mDay, mHour, mMinute;
-    EditText txtn,txtd,txtt;
+    TextInputEditText txtn,txtd,txtt;
+    TextInputLayout tn,td,tt;
     TextView txtid;
-
+    RadioGroup radioGroup;
+    RadioButton high,med,low;
+    Switch aSwitch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -38,27 +45,45 @@ public class New_task extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_task);
 
-        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        aSwitch =(Switch)findViewById(R.id.switchalarmset);
+        high=(RadioButton)findViewById(R.id.high);
+        med=(RadioButton)findViewById(R.id.med);
+        low=(RadioButton)findViewById(R.id.low);
+        low.setChecked(true);
+        radioGroup=(RadioGroup)findViewById(R.id.rdgroup);
         btnsave=(ImageView) findViewById(R.id.ssaveicon);
         btnDatePicker=(ImageView) findViewById(R.id.btn_dateicon);
         btnTimePicker=(ImageView) findViewById(R.id.btn_timeicon);
-        btnback=(ImageView) findViewById(R.id.back_icon);
         txtid=(TextView)findViewById(R.id.txtid);
-        txtn=(EditText)findViewById(R.id.txtname);
-        txtd=(EditText)findViewById(R.id.txtdate);
-        txtt=(EditText)findViewById(R.id.txttime);
+        tn=(TextInputLayout) findViewById(R.id.tn);
+        td=(TextInputLayout)findViewById(R.id.td);
+        tt=(TextInputLayout)findViewById(R.id.tt);
+        txtn=(TextInputEditText) findViewById(R.id.txtname);
+        txtn.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                v.setFocusable(true);
+                v.setFocusableInTouchMode(true);
+                return false;
+            }
+        });
+        txtd=(TextInputEditText)findViewById(R.id.txtdate);
+        txtt=(TextInputEditText)findViewById(R.id.txttime);
 
         mydb = new DatabaseHelper(New_task.this);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null)
         {
-            ref = extras.getString("catId");
+            catid= extras.getString("catId");
+            catname= extras.getString("catName");
         }
 
-        txtd.setOnTouchListener(new View.OnTouchListener() {
+        txtd.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
+            public void onClick(View view) {
                 getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
                 final Calendar c = Calendar.getInstance();
@@ -86,7 +111,6 @@ public class New_task extends Activity
                     }
                 }, mYear, mMonth, mDay);
                 datePickerDialog.show();
-                return false;
             }
         });
 
@@ -122,9 +146,9 @@ public class New_task extends Activity
             }
         });
 
-        txtt.setOnTouchListener(new View.OnTouchListener() {
+        txtt.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
+            public void onClick(View view) {
                 getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
                 final Calendar c = Calendar.getInstance();
@@ -174,7 +198,6 @@ public class New_task extends Activity
                     }
                 }, mHour, mMinute, false);
                 timePickerDialog.show();
-                return false;
             }
         });
 
@@ -234,6 +257,22 @@ public class New_task extends Activity
             }
         });
 
+        aSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(
+                        calendar.get(Calendar.YEAR),
+                        calendar.get(Calendar.MONTH),
+                        (calendar.get(Calendar.DAY_OF_MONTH))
+
+                );
+
+                setAlarm(calendar.getTimeInMillis());
+            }
+        });
+
         btnsave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
@@ -248,33 +287,25 @@ public class New_task extends Activity
                         {
                             public void onClick(DialogInterface dialog, int which)
                             {
-                                if(txtn.getText().toString().length() == 0)
+                                if (validateN() && validateD() && validateT())
                                 {
-                                    txtn.setFocusable(true);
-                                    Toast.makeText(New_task.this,"Please Enter Task Name",Toast.LENGTH_SHORT).show();
-                                }
-                                else if(txtd.getText().toString().length() == 0)
-                                {
-                                    txtd.setFocusable(true);
-                                    Toast.makeText(New_task.this,"Please Enter Date",Toast.LENGTH_SHORT).show();
-                                }
-                                if(txtt.getText().toString().length() == 0)
-                                {
-                                    txtt.setFocusable(true);
-                                    Toast.makeText(New_task.this,"Please Enter Time",Toast.LENGTH_SHORT).show();
-                                }
-                                else {
-                                    boolean isInserted = mydb.insertDatatask(txtn.getText().toString(), txtd.getText().toString(), mytime, txtt.getText().toString(), status, ref);
+                                    boolean isInserted = mydb.insertDatatask(txtn.getText().toString(), txtd.getText().toString(), mytime, txtt.getText().toString(), status, catid, pref);
                                     if (isInserted == true) {
                                         Toast.makeText(New_task.this, "Task saved", Toast.LENGTH_SHORT).show();
+                                        Intent intent=new Intent(New_task.this,Task_list.class);
+                                        intent.putExtra("catId",catid);
+                                        intent.putExtra("catName",catname);
+                                        //intent.putExtra("catName",tvcat_name.getText());
+                                        finish();
+                                        startActivity(intent);
                                         cleartext();
-                                    } else
+                                    } else {
                                         Toast.makeText(New_task.this, "Task not saved", Toast.LENGTH_SHORT).show();
-                                    cleartext();
+                                    }
+                                    return;
                                 }
                             }
-                        }
-                );
+                        });
                 alertDialog.setNegativeButton(
                         "Cancel",
                         new DialogInterface.OnClickListener() {
@@ -286,19 +317,80 @@ public class New_task extends Activity
                 alertDialog.show();
             }
         });
-
-        btnback.setOnClickListener(new View.OnClickListener() {
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(New_task.this,Task_list.class);
-                startActivity(intent);
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId == R.id.high) {
+                    pref="high";
+                } else if (checkedId == R.id.med) {
+                    pref="med";
+                }else if (checkedId == R.id.low) {
+                    pref="low";
+                }
             }
         });
     }
+
     public void cleartext()
     {
         txtn.setText("");
         txtd.setText("");
         txtt.setText("");
     }
+
+    private boolean validateN()
+    {
+        if(txtn.getText().toString().isEmpty())
+        {
+            tn.setError("Task name is Empty!");
+            return false;
+        }
+        else if(txtn.getText().toString().length()>50)
+        {
+            tn.setError("Too long task name!");
+            return false;
+        }
+        else {
+            tn.setError(null);
+            return true;
+        }
+
+    }
+
+    private boolean validateD()
+    {
+        if(txtd.getText().toString().isEmpty())
+        {
+            td.setError("Date is Empty!");
+            return false;
+        }
+        else {
+            td.setError(null);
+            return true;
+        }
+    }
+
+    private boolean validateT()
+    {
+        if(txtt.getText().toString().isEmpty())
+        {
+            tt.setError("Time is Empty!");
+            return false;
+        }
+        else {
+            tt.setError(null);
+            return true;
+        }
+    }
+
+    private void setAlarm(long timeInMillies)
+    {
+        AlarmManager alarmManager= ( AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        Intent intent=new Intent(this, MyAlarm.class);
+        PendingIntent pendingIntent=PendingIntent.getBroadcast(this,0,intent,0);
+        alarmManager.setRepeating(AlarmManager.RTC,timeInMillies,AlarmManager.INTERVAL_DAY,pendingIntent);
+
+        Toast.makeText(this,"Alarm is been set",Toast.LENGTH_SHORT).show();
+    }
+
 }

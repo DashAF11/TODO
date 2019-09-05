@@ -1,20 +1,16 @@
 package com.example.to_do;
 
 import android.app.Dialog;
-import android.app.FragmentTransaction;
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabItem;
 import android.support.design.widget.TabLayout;
-import android.support.transition.Slide;
-import android.support.transition.TransitionInflater;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -23,10 +19,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,12 +34,12 @@ public class Tabbed extends AppCompatActivity
     TabItem tabtask, tabdelayed, tabdone, tabfavourite;
     ImageView btnsearch,btnadd;
     EditText input;
-   // TextView btnaddpop_up, btncanpop_up;
     private ViewPager mViewPager;
     private SectionsPagerAdapter mSectionsPagerAdapter;
-
     boolean check=true;
-
+    FloatingActionButton filter;
+    Spinner spinner;
+    String [] arraySpinner = {" As Creation Time","As Ascending","As Decencing", "Clear Selection"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +55,8 @@ public class Tabbed extends AppCompatActivity
         viewPager = findViewById(R.id.container);
         btnsearch=(ImageView)findViewById(R.id.iconsearch);
         btnadd=(ImageView)findViewById(R.id.addicon);
-
+        filter=(FloatingActionButton)findViewById(R.id.filter);
+        spinner=(Spinner)findViewById(R.id.spinner);
 
 //        btnaddpop_up=(TextView)findViewById(R.id.btnaddpop_up);
 //        btncanpop_up=(TextView)findViewById(R.id.btncancelpop_up);
@@ -75,6 +71,37 @@ public class Tabbed extends AppCompatActivity
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
+
+        /*ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, arraySpinner);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+*/
+       /* filter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                spinner.performClick();
+            }
+        });
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+        {
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id) {
+                // TODO Auto-generated method stub
+                 spinner.getItemAtPosition(position);
+                 if (spinner.equals("As Creation Time")){
+                     Toast.makeText(Tabbed.this, "Hello Toast",Toast.LENGTH_SHORT).show();
+
+                 }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // TODO Auto-generated method stub
+            }
+        });*/
 
         btnadd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,12 +145,20 @@ public class Tabbed extends AppCompatActivity
                             if (catname == null || catname.isEmpty()) {
                                 catname = "New Group";
                             }
+
                             boolean isInserted = mydb.insertData(catname);
                             if (isInserted == true) {
                                 Toast.makeText(Tabbed.this, "Task Group Successfully added.", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(Tabbed.this, Tabbed.class);
                                 finish();
                                 startActivity(intent);
+
+                                /*Fragment fragment = new frag_group_category();
+                                Bundle bundle=new Bundle();
+                                String str="refresh";
+                                bundle.putString("refresh",str);
+                                fragment.setArguments(bundle);*/
+
                                 dialog.cancel();
                             } else {
                                 input.setError("Group Name Empty!");
@@ -141,29 +176,6 @@ public class Tabbed extends AppCompatActivity
                         dialog.dismiss();
                     }
                 });
-                /*AlertDialog.Builder alertDialog = new AlertDialog.Builder(Tabbed.this);
-                //alertDialog.setTitle("Task Group");
-                //alertDialog.setMessage("Enter Group name");
-                //alertDialog.setIcon(R.drawable.icon);
-                alertDialog.setView(R.layout.add_group_layout);
-
-
-                alertDialog.setPositiveButton("Add",
-                        new DialogInterface.OnClickListener()
-                        {
-                            public void onClick(final DialogInterface dialog, int which)
-                            {
-                                dialog.cancel();
-                            }
-                        });
-
-                alertDialog.setNegativeButton("Cancel",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.cancel();
-                            }
-                        });
-                alertDialog.show();*/
 
                 Log.i("asd","ok");
                 dialog.show();
@@ -217,7 +229,7 @@ public class Tabbed extends AppCompatActivity
         }
 
         @Override
-        public Fragment getItem(int position)
+        public android.support.v4.app.Fragment getItem(int position)
         {
             switch (position)
             {
@@ -244,9 +256,4 @@ public class Tabbed extends AppCompatActivity
             return 4;
         }
     }
-
-    /*private void setupWindowAnimations() {
-        Slide slide = (Slide) TransitionInflater.from(this).inflateTransition(R.transition.activity_slide);
-        getWindow().setExitTransition(slide);
-    }*/
 }

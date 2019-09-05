@@ -1,31 +1,27 @@
 package com.example.to_do;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import static android.support.constraint.Constraints.TAG;
+import static android.graphics.Color.rgb;
 
 public class DoneAdapter extends RecyclerView.Adapter<DoneAdapter.MyViewHolder>
 {
     DatabaseHelper mydb;
     Context context;
-    ArrayList<String> list_id, list_catid, list_name, list_date, list_time, list_catname;
+    ArrayList<String> list_id, list_catid, list_name, list_date, list_time, list_catname, list_pref;
     private SendDataToFragment sendDataToFragment;
 
-    public DoneAdapter(frag_done frag_done,Context context, ArrayList<String> list_id, ArrayList<String> list_name, ArrayList<String> list_date, ArrayList<String> list_time, ArrayList<String> list_catid, ArrayList<String> list_catname)
+    public DoneAdapter(frag_done frag_done,Context context, ArrayList<String> list_id, ArrayList<String> list_name, ArrayList<String> list_date, ArrayList<String> list_time, ArrayList<String> list_catid, ArrayList<String> list_catname, ArrayList<String> list_pref)
     {
         this.context = context;
         this.list_id = list_id;
@@ -34,6 +30,7 @@ public class DoneAdapter extends RecyclerView.Adapter<DoneAdapter.MyViewHolder>
         this.list_time = list_time;
         this.list_catid = list_catid;
         this.list_catname = list_catname;
+        this.list_pref = list_pref;
         sendDataToFragment = (SendDataToFragment) frag_done;
     }
 
@@ -44,8 +41,9 @@ public class DoneAdapter extends RecyclerView.Adapter<DoneAdapter.MyViewHolder>
 
     public static class MyViewHolder extends RecyclerView.ViewHolder
     {
-        TextView tvi,tvd,tvn,tvt,tvcatname;
+        TextView tvi,tvd,tvn,tvt,tvcatname,tvp;
         ImageView reset;
+        RelativeLayout prefrence_color;
 
         public MyViewHolder(View itemView)
         {
@@ -55,7 +53,9 @@ public class DoneAdapter extends RecyclerView.Adapter<DoneAdapter.MyViewHolder>
             this.tvn=(TextView) itemView.findViewById(R.id.tv_taskname);
             this.tvd=(TextView) itemView.findViewById(R.id.tv_taskdate);
             this.tvt=(TextView) itemView.findViewById(R.id.tv_tasktime);
+            this.tvp=(TextView) itemView.findViewById(R.id.tvtask_pref);
             this.reset=(ImageView)itemView.findViewById(R.id.btn_refresh);
+            prefrence_color=(RelativeLayout)itemView.findViewById(R.id.prefrence_color);
         }
     }
 
@@ -80,15 +80,28 @@ public class DoneAdapter extends RecyclerView.Adapter<DoneAdapter.MyViewHolder>
 
         finalString = new StringBuffer();
         while (index < tmpString.length()) {
-            Log.i(TAG, "test = " + tmpString.substring(index, Math.min(index + 25,tmpString.length())));
+            //Log.i(TAG, "test = " + tmpString.substring(index, Math.min(index + 25,tmpString.length())));
             finalString.append(tmpString.substring(index, Math.min(index + 25,tmpString.length()))+"\n");
             index += 25;
         }
         holder.tvn.setText(finalString);
-
         holder.tvd.setText(list_date.get(listPosition));
         holder.tvt.setText(list_time.get(listPosition));
         holder.tvcatname.setText(list_catname.get(listPosition));
+        holder.tvp.setText(list_pref.get(listPosition));
+
+        if (list_pref.get(listPosition).equals("high"))
+        {
+            holder.prefrence_color.setBackgroundColor(rgb(255,0,0));
+        }
+        else if (list_pref.get(listPosition).equals("med"))
+        {
+            holder.prefrence_color.setBackgroundColor(rgb(255,140,0));
+        }
+        else if (list_pref.get(listPosition).equals("low"))
+        {
+            holder.prefrence_color.setBackgroundColor(rgb(0,128,0));
+        }
 
         holder.reset.setOnClickListener(new View.OnClickListener() {
             @Override

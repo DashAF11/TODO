@@ -8,11 +8,7 @@ import android.util.Log;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-
-import static android.provider.Contacts.SettingsColumns.KEY;
 
 
 public class DatabaseHelper extends SQLiteOpenHelper
@@ -33,6 +29,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
     public static final String COL_5_task = "TASK_12HR_TIME";
     public static final String COL_6_task = "TASK_STATUS";
     public static final String COL_7_task = "CAT_ID";
+    public static final String COL_8_task = "TASK_PREF";
 
     SQLiteDatabase db;
 
@@ -44,7 +41,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
     public void onCreate(SQLiteDatabase db)
     {
         db.execSQL("create table " + TABLE_NAME +" (ID INTEGER PRIMARY KEY AUTOINCREMENT,CAT_NAME TEXT,FAV TEXT)");
-        db.execSQL("create table " + TABLE_NAME2 + " (TASK_ID integer primary key autoincrement, TASK_NAME text not null, TASK_DATE date not null, TASK_TIME time not null, TASK_12HR_TIME time not null, TASK_STATUS text, CAT_ID integer,FOREIGN KEY (CAT_ID) REFERENCES categories(ID))");
+        db.execSQL("create table " + TABLE_NAME2 + " (TASK_ID integer primary key autoincrement, TASK_NAME text not null, TASK_DATE date not null, TASK_TIME time not null, TASK_12HR_TIME time not null, TASK_STATUS text, CAT_ID integer,TASK_PREF text,FOREIGN KEY (CAT_ID) REFERENCES categories(ID))");
         this.db=db;
     }
 
@@ -74,12 +71,41 @@ public class DatabaseHelper extends SQLiteOpenHelper
     {
         DateFormat df = new SimpleDateFormat("dd-MM-yyyy");         //date
         String date = df.format(Calendar.getInstance().getTime());
+        //Log.i("d\t",date);
 
         DateFormat tf = new SimpleDateFormat("HH:mm");            //time
         String time = tf.format(Calendar.getInstance().getTime());
+        //Log.i("d\t",time);
 
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery(" select * from "+TABLE_NAME2+" where date(substr("+COL_3_task+",7)||substr("+COL_3_task+",4,2)||substr("+COL_3_task+",1,2)) < date(substr('"+date+"',7)||substr('"+date+"',4,2)||substr('"+date+"',1,2)) or (date(substr("+COL_3_task+",7)||substr("+COL_3_task+",4,2)||substr("+COL_3_task+",1,2)) = date(substr('"+date+"',7)||substr('"+date+"',4,2)||substr('"+date+"',1,2))) and "+COL_4_task+" <= '"+time+"' order by "+COL_4_task+" and "+COL_4_task+" ",null);
+        Cursor res = db.rawQuery(" select * from "+TABLE_NAME2+" where date(substr("+COL_3_task+",7)||substr("+COL_3_task+",4,2)||substr("+COL_3_task+",1,2)) < date(substr('"+date+"',7)||substr('"+date+"',4,2)||substr('"+date+"',1,2)) or (date(substr("+COL_3_task+",7)||substr("+COL_3_task+",4,2)||substr("+COL_3_task+",1,2)) = date(substr('"+date+"',7)||substr('"+date+"',4,2)||substr('"+date+"',1,2))) and "+COL_4_task+" <= '"+time+"' order by "+COL_4_task+" " ,null);
+//        Log.i("qqqqqq","select * from "+TABLE_NAME2+" where date(substr("+COL_3_task+",7)||substr("+COL_3_task+",4,2)||substr("+COL_3_task+",1,2)) < date(substr('"+date+"',7)||substr('"+date+"',4,2)||substr('"+date+"',1,2)) or (date(substr("+COL_3_task+",7)||substr("+COL_3_task+",4,2)||substr("+COL_3_task+",1,2)) = date(substr('"+date+"',7)||substr('"+date+"',4,2)||substr('"+date+"',1,2))) and "+COL_4_task+" <= '"+time+"' order by "+COL_4_task+" ");
+       // Log.i("qqqqq", "time_exceed: "+res.getCount());
+        return res;
+    }
+
+    public  Cursor color_prefdata(String pref)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select * from "+TABLE_NAME2+" where "+COL_8_task+" = '"+pref+"' ",null);
+        Log.i("xxxxx_database","select * from "+TABLE_NAME2+" where "+COL_8_task+" = '"+pref+"' ");
+        //Log.i("xxxxx_resdone", String.valueOf(res));
+        return res;
+    }
+
+    public  Cursor task_asc()
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select * from "+TABLE_NAME2+" order by "+COL_2_task+" ASC; ",null);
+        //Log.i("xxxxx_resdone", String.valueOf(res));
+        return res;
+    }
+
+    public  Cursor task_desc()
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select * from "+TABLE_NAME2+" order by "+COL_2_task+" DESC; ",null);
+        //Log.i("xxxxx_resdone", String.valueOf(res));
         return res;
     }
 
@@ -88,6 +114,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
         String status="done";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("select * from "+TABLE_NAME2+" where "+COL_6_task+" = '"+status+"' ",null);
+        //Log.i("xxxxx_resdone", String.valueOf(res));
         return res;
     }
 
@@ -107,7 +134,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
         return res;
     }
 
-    public boolean insertDatatask(String task_name, String task_date, String task_time, String task_12hrTime, String task_status, String task_ref_id)
+    public boolean insertDatatask(String task_name, String task_date, String task_time, String task_12hrTime, String task_status, String task_ref_id, String pref)
     {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -117,6 +144,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
         contentValues.put(COL_5_task,task_12hrTime);
         contentValues.put(COL_6_task,task_status);
         contentValues.put(COL_7_task,task_ref_id);
+        contentValues.put(COL_8_task,pref);
 
         long result = db.insert(TABLE_NAME2,null ,contentValues);
         if(result == -1)
@@ -129,6 +157,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
     {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("select * from "+TABLE_NAME+" where "+COL_2+" like '%"+str+"%' ",null);
+        Log.i("asdasdasdasdasd","select * from "+TABLE_NAME+" where "+COL_2+" like '%"+str+"%' "+res.getCount());
         return res;
     }
 
@@ -202,7 +231,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
         return true;
     }
 
-    public boolean update_editTask(String name, String date, String time, String time12hr, String id)
+    public boolean update_editTask(String name, String date, String time, String time12hr, String id, String pref)
     {
         db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -211,7 +240,8 @@ public class DatabaseHelper extends SQLiteOpenHelper
         contentValues.put(COL_4_task,time);
         contentValues.put(COL_5_task,time12hr);
         contentValues.put(COL_1,id);
-        db.execSQL("update "+TABLE_NAME2+" set "+COL_2_task+" = '"+name+"', "+COL_3_task+" = '"+date+"', "+COL_4_task+" = '"+time+"',"+COL_5_task+" = '"+time12hr+"'  where "+COL_1_task+" = "+id+" ");
+        contentValues.put(COL_8_task,pref);
+        db.execSQL("update "+TABLE_NAME2+" set "+COL_2_task+" = '"+name+"', "+COL_3_task+" = '"+date+"', "+COL_4_task+" = '"+time+"',"+COL_5_task+" = '"+time12hr+"', "+COL_8_task+" = '"+pref+"'  where "+COL_1_task+" = "+id+" ");
         return true;
     }
 
@@ -248,6 +278,15 @@ public class DatabaseHelper extends SQLiteOpenHelper
         db.execSQL("delete from "+TABLE_NAME2+" where "+COL_7_task+" = '"+id+"' ");
         return true;
     }
+
+    public boolean deleteall_taskDONE ()
+    {
+        String str="done";
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("delete from "+TABLE_NAME2+" where "+COL_6_task+" = '"+str+"'  ");
+        return true;
+    }
+
 
     public boolean delete_task (String id)
     {

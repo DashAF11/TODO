@@ -2,11 +2,8 @@ package com.example.to_do;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +40,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
     {
         //define things here
         TextView tvcat_name,txtcat_id,count_cat,countp;
-        ImageView fav_id,btnicondelete;
+        ImageView fav_id;
         RelativeLayout btnnext;
 
         public MyViewHolder(View itemView)
@@ -55,7 +52,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
             this.tvcat_name = (TextView) itemView.findViewById(R.id.cat_name);
             this.fav_id = (ImageView) itemView.findViewById(R.id.fav);
             this.btnnext = (RelativeLayout) itemView.findViewById(R.id.btnrelative_categoryonclick);
-            this.btnicondelete=(ImageView)itemView.findViewById(R.id.cat_del);
         }
     }
 
@@ -72,98 +68,55 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
     public void onBindViewHolder(final MyViewHolder holder, final int listPosition) {
         holder.countp.setText(countp.get(listPosition));
         holder.count_cat.setText(count.get(listPosition));
-       holder.tvcat_name.setText(category.get(listPosition));
-       holder.txtcat_id.setText(category_id.get(listPosition));
+        holder.tvcat_name.setText(category.get(listPosition));
+        holder.txtcat_id.setText(category_id.get(listPosition));
 
-       if(cat_fav.get(listPosition).equals("notfav"))
-       {
-           holder.fav_id.setImageResource(R.drawable.notlike);
-       }
-       else
-           {
-           holder.fav_id.setImageResource(R.drawable.like);
-       }
+        if (cat_fav.get(listPosition).equals("notfav")) {
+            holder.fav_id.setImageResource(R.drawable.notlike);
+        } else {
+            holder.fav_id.setImageResource(R.drawable.like);
+        }
 
-       holder.fav_id.setOnClickListener(new View.OnClickListener()
-       {
-           @Override
-           public void onClick(View v)
-           {
-               if(cat_fav.get(listPosition).equals("notfav"))
-               {
-                   String status="fav";
-                   String id =(holder.txtcat_id.getText().toString());
+        holder.fav_id.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (cat_fav.get(listPosition).equals("notfav")) {
+                    String status = "fav";
+                    String id = (holder.txtcat_id.getText().toString());
 
-                   mydb = new DatabaseHelper(context);
+                    mydb = new DatabaseHelper(context);
 
-                   mydb.update_cat_fav(status,id);
-                   holder.fav_id.setImageResource(R.drawable.like);
+                    mydb.update_cat_fav(status, id);
+                    holder.fav_id.setImageResource(R.drawable.like);
 
-                    cat_fav.set(listPosition,"fav");//onscreen list refresh
+                    cat_fav.set(listPosition, "fav");//onscreen list refresh
                     notifyItemChanged(listPosition);
-               }
-               else if(cat_fav.get(listPosition).equals("fav"))
-               {
-                   String status="notfav";
-                   String id =(holder.txtcat_id.getText().toString());
+                } else if (cat_fav.get(listPosition).equals("fav")) {
+                    String status = "notfav";
+                    String id = (holder.txtcat_id.getText().toString());
 
-                   mydb = new DatabaseHelper(context);
-                   mydb.update_cat_fav(status,id);
+                    mydb = new DatabaseHelper(context);
+                    mydb.update_cat_fav(status, id);
 
-                   holder.fav_id.setImageResource(R.drawable.notlike);
+                    holder.fav_id.setImageResource(R.drawable.notlike);
 
-                   cat_fav.set(listPosition,"notfav");
-                   notifyItemChanged(listPosition);
-               }
-           }
-       });
+                    cat_fav.set(listPosition, "notfav");
+                    notifyItemChanged(listPosition);
+                }
+            }
+        });
 
-       holder.btnnext.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view) {
-               Intent intent=new Intent(context, Task_list.class);
-               intent.putExtra("catId",holder.txtcat_id.getText());
-               intent.putExtra("catName",holder.tvcat_name.getText());
-               ((Activity)context).finish();
-               context.startActivity(intent);
-           }
-       });
-
-     holder.btnicondelete.setOnClickListener(new View.OnClickListener() {
-         @Override
-         public void onClick(View v) {
-             AlertDialog.Builder alertDialog = new AlertDialog.Builder((Activity) v.getContext());
-             alertDialog.setTitle("Delete this Group?");
-             alertDialog.setMessage("Do you really want to delete this, it may contain tasks!!!");
-             alertDialog.setIcon(R.drawable.icon);
-             alertDialog.setPositiveButton(
-                     "Delete",
-                     new DialogInterface.OnClickListener()
-                     {
-                         public void onClick(DialogInterface dialog, int which)
-                         {
-                             String id=holder.txtcat_id.getText().toString();
-
-                             mydb = new DatabaseHelper(context);
-                             mydb.delete_category(id);
-                             mydb.deleteall_task(id);
-                             sendDataToFragment.sendData("add","2");
-                         }
-                     }
-             );
-             alertDialog.setNegativeButton(
-                     "Cancel",
-                     new DialogInterface.OnClickListener() {
-                         public void onClick(DialogInterface dialog, int id) {
-                             dialog.cancel();
-                         }
-                     });
-
-             alertDialog.show();
-         }
-     });
+        holder.btnnext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, Task_list.class);
+                intent.putExtra("catId", holder.txtcat_id.getText());
+                intent.putExtra("catName", holder.tvcat_name.getText());
+                ((Activity) context).finish();
+                context.startActivity(intent);
+            }
+        });
     }
-
 
     @Override
     public int getItemCount()

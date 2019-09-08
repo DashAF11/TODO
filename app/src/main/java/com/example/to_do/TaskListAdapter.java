@@ -1,34 +1,27 @@
 package com.example.to_do;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Paint;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import static android.support.constraint.Constraints.TAG;
+import static android.graphics.Color.rgb;
 
 public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.MyViewHolder>
 {
     DatabaseHelper mydb;
     Context context;
     String taskid;
-    ArrayList<String> list, list_id, list_date, list_time, list_status;
-
-    public TaskListAdapter(Context context, ArrayList<String> list_id, ArrayList<String> list , ArrayList<String> list_date, ArrayList<String> list_time, ArrayList<String> list_status)//
+    ArrayList<String> list, list_id, list_date, list_time, list_status ,list_pref;
+    public TaskListAdapter(Context context, ArrayList<String> list_id, ArrayList<String> list , ArrayList<String> list_date, ArrayList<String> list_time, ArrayList<String> list_status, ArrayList<String> list_pref)//
     {
         this.context = context;
         this.list_id = list_id;
@@ -36,14 +29,15 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.MyView
         this.list_date = list_date;
         this.list_time = list_time;
         this.list_status = list_status;
+        this.list_pref = list_pref;
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder
     {
-        TextView tvtask_id, tvtask_name, name, textView_date, textView_time, textView_status;
+        TextView tvtask_id, tvtask_name, name, textView_date, textView_time, textView_status, tvtask_pref;
         CheckBox checkBox;
-        ImageView btndeleteicon;
-        RelativeLayout btnlayout_taskClick;
+        //ImageView btndeleteicon;
+        RelativeLayout prefrence_color;
 
         public MyViewHolder(View itemView)
         {
@@ -54,9 +48,10 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.MyView
             this.textView_date=(TextView) itemView.findViewById(R.id.tvTASK_DATE);
             this.textView_time=(TextView) itemView.findViewById(R.id.tvTASK_TIME);
             this.textView_status=(TextView) itemView.findViewById(R.id.tvtask_status);
-            this.btndeleteicon=(ImageView)itemView.findViewById(R.id.btn_delete_taskicon);
+            this.tvtask_pref=(TextView) itemView.findViewById(R.id.tvtask_pref);
+            //this.btndeleteicon=(ImageView)itemView.findViewById(R.id.btn_delete_taskicon);
             this.checkBox=(CheckBox)itemView.findViewById(R.id.chkstatus);
-            btnlayout_taskClick=(RelativeLayout) itemView.findViewById(R.id.btnlayout_taskClick);
+            prefrence_color=(RelativeLayout)itemView.findViewById(R.id.prefrence_color);
         }
     }
 
@@ -106,6 +101,20 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.MyView
             holder.textView_time.setPaintFlags(holder.textView_time.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         }
 
+        holder.tvtask_pref.setText(list_pref.get(listPosition));
+        if (list_pref.get(listPosition).equals("high"))
+        {
+            holder.prefrence_color.setBackgroundColor(rgb(255,0,0));
+        }
+        else if (list_pref.get(listPosition).equals("med"))
+        {
+            holder.prefrence_color.setBackgroundColor(rgb(255,140,0));
+        }
+       else if (list_pref.get(listPosition).equals("low"))
+        {
+            holder.prefrence_color.setBackgroundColor(rgb(0,128,0));
+        }
+
         holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -138,19 +147,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.MyView
             }
         });
 
-        holder.btnlayout_taskClick.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, edit_task.class);
-                intent.putExtra("taskId", holder.tvtask_id.getText().toString());
-                intent.putExtra("taskname", holder.name.getText().toString());
-                intent.putExtra("taskdate", holder.textView_date.getText().toString());
-                intent.putExtra("tasktime", holder.textView_time.getText().toString());
-                context.startActivity(intent);
-            }
-        });
-
-        holder.btndeleteicon.setOnClickListener(new View.OnClickListener() {
+        /*holder.btndeleteicon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 android.support.v7.app.AlertDialog.Builder alertDialog = new android.support.v7.app.AlertDialog.Builder((Activity) v.getContext());
@@ -179,7 +176,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.MyView
 
                 alertDialog.show();
             }
-        });
+        });*/
     }
 
     @Override

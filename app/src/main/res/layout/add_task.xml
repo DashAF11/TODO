@@ -13,55 +13,30 @@
             android:layout_width="match_parent"
             android:layout_height="65dp">
 
-            <ImageView
-                android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true"
-                android:background="@drawable/back_icon"
-                android:layout_width="37dp"
-                android:layout_height="37dp"
-                android:id="@+id/back_icon"/>
-
-            <ImageView
-                android:layout_marginLeft="5dp"
-                android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true"
-                android:background="@drawable/cancle_icon"
-                android:layout_width="34dp"
-                android:layout_height="34dp"
-                android:id="@+id/cancle"
-                android:visibility="gone"/>
-
-            <ImageView
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="55dp"
-                android:layout_centerVertical="true"
-                android:background="@drawable/dummy"
-                android:id="@+id/dummy"
-                android:layout_width="34dp"
-                android:layout_height="34dp"/>
 
             <EditText
                 android:id="@+id/txtcat_name"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="45dp"
+                android:layout_marginLeft="5dp"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:lines="2"
+                android:layout_toLeftOf="@id/add_newtask"
                 android:textColor="@color/white"
-                android:layout_toLeftOf="@+id/dummy"
                 android:backgroundTint="@color/mainbar"
                 android:textCursorDrawable="@color/tabs"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
 
-            <ImageView
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="55dp"
-                android:layout_centerVertical="true"
-                android:background="@drawable/edit_icon"
-                android:id="@+id/edit_catname"
-                android:layout_width="34dp"
-                android:layout_height="34dp" />
+<!--            <Switch-->
+<!--                android:layout_centerVertical="true"-->
+<!--                android:layout_toLeftOf="@+id/add_newtask"-->
+<!--                android:id="@+id/toggle"-->
+<!--                android:layout_margin="3dp"-->
+<!--                android:textOff="Ascending"-->
+<!--                android:textOn="Descending"-->
+<!--                android:layout_width="50dp"-->
+<!--                android:layout_height="wrap_content"/>-->
 
             <ImageView
                 android:layout_alignParentRight="true"
@@ -71,16 +46,6 @@
                 android:id="@+id/add_newtask"
                 android:layout_width="34dp"
                 android:layout_height="34dp" />
-
-            <ImageView
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="10dp"
-                android:layout_centerVertical="true"
-                android:background="@drawable/saveicon"
-                android:id="@+id/save"
-                android:layout_width="34dp"
-                android:layout_height="34dp"
-                android:visibility="gone"/>
 
         </RelativeLayout>
 
@@ -110,7 +75,7 @@
     </LinearLayout>
 
     <RelativeLayout
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_marginTop="5dp"
         android:id="@+id/r2"
         android:layout_width="match_parent"
@@ -124,30 +89,99 @@
             android:gravity="center_vertical"
             android:hint="Task List is Empty"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            />
+
+        <RelativeLayout
+            android:id="@+id/emptyadd_click"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/t1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
         <ImageView
-            android:layout_marginTop="10dp"
-            android:layout_below="@+id/t1"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
             android:id="@+id/t2"
-            android:layout_marginLeft="130dp"
             android:background="@drawable/addicon"
             android:backgroundTint="@color/button"
+            android:layout_width="34dp"
+            android:layout_height="34dp" />
+
+        <TextView
+            android:gravity="center_horizontal"
+            android:layout_marginTop="25dp"
+            android:id="@+id/t3"
+            android:layout_below="@+id/t2"
+            android:textSize="18sp"
+            android:hint="Add Task"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <TextView
-            android:layout_marginTop="10dp"
-            android:id="@+id/t3"
-            android:layout_below="@+id/t1"
-            android:layout_toRightOf="@+id/t2"
-            android:textSize="18sp"
-            android:layout_centerHorizontal="true"
-            android:hint="Add Task"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+        </RelativeLayout>
 
     </RelativeLayout>
 
+   <!-- <RelativeLayout
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true">
+
+
+        <LinearLayout
+            android:layout_marginBottom="10dp"
+            android:gravity="bottom"
+            android:id="@+id/layout"
+            android:weightSum="2"
+            android:layout_width="match_parent"
+            android:layout_height="100dp">
+
+            <RelativeLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/filtertime"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/timefilter"
+                    android:backgroundTint="@color/tabs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>-->
+
+    <Spinner
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        android:id="@+id/spinner"
+        android:layout_above="@+id/filter"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/filter"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/filter"
+        android:backgroundTint="@color/tabs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
 </RelativeLayout>

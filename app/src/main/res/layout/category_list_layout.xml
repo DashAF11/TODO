@@ -24,22 +24,13 @@
         android:textStyle="bold"/>
 
      <ImageView
+         android:layout_marginRight="7dp"
          android:layout_centerVertical="true"
          android:layout_alignParentRight="true"
-         android:layout_marginRight="40dp"
          android:layout_width="25dp"
          android:layout_height="25dp"
          android:src="@drawable/notlike"
          android:id="@+id/fav" />
-
-     <ImageView
-         android:layout_toLeftOf="@+id/fav"
-         android:layout_centerVertical="true"
-         android:layout_alignParentRight="true"
-         android:id="@+id/cat_del"
-         android:layout_width="34dp"
-         android:layout_height="34dp"
-         android:background="@drawable/deleteicon"/>
 
      <TextView
          android:layout_alignParentLeft="true"

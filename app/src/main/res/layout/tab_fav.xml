@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="6dp"
     tools:context=".frag_fav">
 
     <RelativeLayout
@@ -22,7 +23,6 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/Recyclelistview_fav"
             android:layout_marginTop="1dp"
-            android:padding="6dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="vertical"/>
@@ -32,7 +32,7 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_marginTop="5dp"
         android:id="@+id/r2"
         android:layout_width="match_parent"
@@ -47,28 +47,33 @@
             android:hint="Favourite List is Empty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-
-        <ImageView
-            android:layout_marginTop="10dp"
-            android:layout_below="@+id/t1"
-            android:id="@+id/t2"
-            android:layout_marginLeft="100dp"
-            android:background="@drawable/like"
-            android:layout_width="22dp"
-            android:layout_height="22dp" />
-
-        <TextView
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="10dp"
-            android:id="@+id/t3"
-            android:layout_below="@+id/t1"
-            android:layout_toRightOf="@+id/t2"
-            android:textSize="18sp"
+        <RelativeLayout
+            android:id="@+id/emptyadd_click"
             android:layout_centerHorizontal="true"
-            android:hint="Add Favourites"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_below="@+id/t1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
+            <ImageView
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:id="@+id/t2"
+                android:background="@drawable/like"
+
+                android:layout_width="34dp"
+                android:layout_height="34dp" />
+
+            <TextView
+                android:gravity="center_horizontal"
+                android:layout_marginTop="25dp"
+                android:id="@+id/t3"
+                android:layout_below="@+id/t2"
+                android:textSize="18sp"
+                android:hint="Add Favourites"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
     </RelativeLayout>
 
 

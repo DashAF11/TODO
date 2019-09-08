@@ -84,27 +84,35 @@ public class DatabaseHelper extends SQLiteOpenHelper
         return res;
     }
 
-    public  Cursor color_prefdata(String pref)
+    public  Cursor timeorder(String id)
+    {
+        DateFormat df = new SimpleDateFormat("dd-MM-yyyy");         //date
+        String date = df.format(Calendar.getInstance().getTime());
+        //Log.i("d\t",date);
+
+        DateFormat tf = new SimpleDateFormat("HH:mm");            //time
+        String time = tf.format(Calendar.getInstance().getTime());
+        //Log.i("d\t",time);
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery(" select * from "+TABLE_NAME2+"  where "+COL_7_task+" = '"+id+"' order by "+COL_4_task+" " ,null);
+
+        return res;
+    }
+
+    public  Cursor color_prefdata(String id,String pref)
     {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("select * from "+TABLE_NAME2+" where "+COL_8_task+" = '"+pref+"' ",null);
+        Cursor res = db.rawQuery("select * from "+TABLE_NAME2+" where "+COL_7_task+" = '"+id+"' and "+COL_8_task+" = '"+pref+"' ",null);
         Log.i("xxxxx_database","select * from "+TABLE_NAME2+" where "+COL_8_task+" = '"+pref+"' ");
         //Log.i("xxxxx_resdone", String.valueOf(res));
         return res;
     }
 
-    public  Cursor task_asc()
+    public  Cursor task_asc(String id)
     {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("select * from "+TABLE_NAME2+" order by "+COL_2_task+" ASC; ",null);
-        //Log.i("xxxxx_resdone", String.valueOf(res));
-        return res;
-    }
-
-    public  Cursor task_desc()
-    {
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("select * from "+TABLE_NAME2+" order by "+COL_2_task+" DESC; ",null);
+        Cursor res = db.rawQuery("select * from "+TABLE_NAME2+" where "+COL_7_task+" = '"+id+"' order by "+COL_2_task+" ASC; ",null);
         //Log.i("xxxxx_resdone", String.valueOf(res));
         return res;
     }

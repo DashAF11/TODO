@@ -10,6 +10,7 @@
     tools:context=".splash">
 
     <TextView
+        android:id="@+id/text1"
         android:textStyle="bold"
         android:layout_gravity="center_vertical"
         android:gravity="center"
@@ -22,12 +23,14 @@
 
 
         <ImageView
+            android:id="@+id/icon"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_gravity="center|center_vertical"
             android:background="@drawable/icon" />
 
     <TextView
+        android:id="@+id/text2"
         android:textStyle="bold|italic"
         android:layout_gravity="center_vertical"
         android:gravity="center"

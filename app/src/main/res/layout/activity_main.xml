@@ -17,11 +17,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:text="Choose your List"
+                android:text="Choose your List Group"
                 android:textColor="@color/topbar"
-                android:textSize="40sp"
+                android:textSize="32sp"
                 android:textStyle="bold" />
-
 
             <TextView
                 android:id="@+id/textView2"
@@ -47,6 +46,8 @@
                 android:textStyle="italic" />
 
             <RelativeLayout
+                android:padding="2dp"
+                android:layout_centerVertical="true"
                 android:id="@+id/relativelayout3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -54,16 +55,10 @@
                 android:layout_marginTop="30dp"
                 android:background="@drawable/recycle_background_layout">
 
-
-                <LinearLayout
-                    android:layout_marginRight="15dp"
-                    android:gravity="right"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="265dp"
-                    android:orientation="horizontal">
-
                     <CheckBox
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:layout_alignParentRight="true"
                         android:buttonTint="@color/mainbar"
                         android:backgroundTint="@color/tabs"
                         android:id="@+id/chkbgro"
@@ -73,30 +68,19 @@
                         android:scaleY="1.5"
                         android:textSize="28dp" />
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="45dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:orientation="horizontal"
-                    android:padding="5dp">
-
                     <ImageView
+                        android:id="@+id/m1"
+                        android:layout_marginLeft="10dp"
+                        android:layout_centerVertical="true"
                         android:layout_width="35dp"
                         android:layout_height="30dp"
                         android:layout_gravity="left"
                         android:background="@drawable/menuicon" />
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="65dp"
-                    android:gravity="center">
-
                     <TextView
+                        android:layout_marginLeft="15dp"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/m1"
                         android:id="@+id/tvgro"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -104,11 +88,11 @@
                         android:textColor="@color/button"
                         android:textSize="25dp"/>
 
-                </LinearLayout>
-
             </RelativeLayout>
 
             <RelativeLayout
+                android:padding="2dp"
+                android:layout_centerVertical="true"
                 android:id="@+id/relativelayout4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -116,61 +100,43 @@
                 android:layout_marginTop="1dp"
                 android:background="@drawable/recycle_background_layout">
 
-                <LinearLayout
-                    android:layout_marginRight="15dp"
-                    android:gravity="right"
-                    android:layout_width="match_parent"
+                <CheckBox
+                    android:layout_marginRight="10dp"
+                    android:layout_alignParentRight="true"
+                    android:buttonTint="@color/mainbar"
+                    android:backgroundTint="@color/tabs"
+                    android:id="@+id/chkbmovies"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="265dp"
-                    android:orientation="horizontal">
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
+                    android:textSize="28dp" />
 
-                    <CheckBox
-                        android:buttonTint="@color/mainbar"
-                        android:backgroundTint="@color/tabs"
-                        android:id="@+id/chkbmovies"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:scaleX="1.5"
-                        android:scaleY="1.5"
-                        android:textSize="28dp" />
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="45dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:orientation="horizontal"
-                    android:padding="5dp">
-
-                    <ImageView
+                <ImageView
+                    android:id="@+id/m2"
+                    android:layout_marginLeft="10dp"
+                    android:layout_centerVertical="true"
                         android:layout_width="35dp"
                         android:layout_height="30dp"
                         android:layout_gravity="left"
                         android:background="@drawable/menuicon" />
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="65dp"
-                    android:gravity="center">
-
                     <TextView
+                        android:layout_toRightOf="@+id/m2"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
                         android:id="@+id/tvmov"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
                         android:text="Movies to watch"
                         android:textColor="@color/button"
                         android:textSize="25dp" />
 
-                </LinearLayout>
-
             </RelativeLayout>
 
             <RelativeLayout
+                android:padding="2dp"
                 android:id="@+id/relativelayout5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -178,15 +144,9 @@
                 android:layout_marginTop="1dp"
                 android:background="@drawable/recycle_background_layout">
 
-                <LinearLayout
-                    android:layout_marginRight="15dp"
-                    android:gravity="right"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="265dp"
-                    android:orientation="horizontal">
-
                     <CheckBox
+                        android:layout_marginRight="10dp"
+                        android:layout_alignParentRight="true"
                         android:buttonTint="@color/mainbar"
                         android:backgroundTint="@color/tabs"
                         android:id="@+id/chkbtravel"
@@ -196,43 +156,31 @@
                         android:scaleY="1.5"
                         android:textSize="28dp" />
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="45dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:orientation="horizontal"
-                    android:padding="5dp">
-
                     <ImageView
+                        android:layout_centerVertical="true"
+                        android:id="@+id/m3"
+                        android:layout_marginLeft="10dp"
                         android:layout_width="35dp"
                         android:layout_height="30dp"
                         android:layout_gravity="left"
                         android:background="@drawable/menuicon" />
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="65dp"
-                    android:gravity="center">
-
                     <TextView
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/m3"
+                        android:layout_marginLeft="15dp"
                         android:id="@+id/tvtravel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Travel"
-
                         android:textColor="@color/button"
                         android:textSize="25dp"/>
-
-                </LinearLayout>
 
             </RelativeLayout>
 
             <RelativeLayout
+                android:layout_centerVertical="true"
+                android:padding="2dp"
                 android:id="@+id/relativelayout6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -240,61 +188,44 @@
                 android:layout_marginTop="1dp"
                 android:background="@drawable/recycle_background_layout">
 
-                <LinearLayout
-                    android:layout_marginRight="15dp"
-                    android:gravity="right"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="265dp"
-                    android:orientation="horizontal">
-
                     <CheckBox
+                        android:layout_marginRight="10dp"
+                        android:layout_alignParentRight="true"
                         android:buttonTint="@color/mainbar"
                         android:backgroundTint="@color/tabs"
                         android:id="@+id/chkbsports"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:scaleX="1.5"
+                        android:layout_centerVertical="true"
                         android:scaleY="1.5"
                         android:textSize="28dp" />
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="45dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:orientation="horizontal"
-                    android:padding="5dp">
-
                     <ImageView
+                        android:layout_marginLeft="10dp"
+                        android:id="@+id/m4"
+                        android:layout_centerVertical="true"
                         android:layout_width="35dp"
                         android:layout_height="30dp"
                         android:layout_gravity="left"
                         android:background="@drawable/menuicon" />
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="65dp"
-                    android:gravity="center">
-
                     <TextView
+                        android:layout_marginLeft="15dp"
+                        android:layout_toRightOf="@+id/m4"
+                        android:layout_centerVertical="true"
                         android:id="@+id/tvsport"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Sports"
-
                         android:textColor="@color/button"
                         android:textSize="25dp" />
-
-                </LinearLayout>
 
             </RelativeLayout>
 
             <RelativeLayout
+                android:layout_centerVertical="true"
+                android:padding="2dp"
                 android:id="@+id/relativelayout7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -302,48 +233,19 @@
                 android:layout_marginTop="1dp"
                 android:background="@drawable/recycle_background_layout">
 
-                <LinearLayout
-                    android:layout_marginRight="15dp"
-                    android:gravity="right"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="265dp"
-                    android:orientation="horizontal">
-
-                    <CheckBox
-                        android:buttonTint="@color/mainbar"
-                        android:backgroundTint="@color/tabs"
-                        android:id="@+id/chkbwork"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:scaleX="1.5"
-                        android:scaleY="1.5"
-                        android:textSize="28dp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="45dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:orientation="horizontal"
-                    android:padding="5dp">
-
                     <ImageView
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:id="@+id/m5"
                         android:layout_width="35dp"
                         android:layout_height="30dp"
                         android:layout_gravity="left"
                         android:background="@drawable/menuicon" />
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="65dp"
-                    android:gravity="center">
-
                     <TextView
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:layout_toRightOf="@+id/m5"
                         android:id="@+id/tvwork"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -352,7 +254,17 @@
                         android:textColor="@color/button"
                         android:textSize="25dp"/>
 
-                </LinearLayout>
+                <CheckBox
+                    android:layout_marginRight="10dp"
+                    android:layout_alignParentRight="true"
+                    android:buttonTint="@color/mainbar"
+                    android:backgroundTint="@color/tabs"
+                    android:id="@+id/chkbwork"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
+                    android:textSize="28dp" />
 
             </RelativeLayout>
 
@@ -368,7 +280,6 @@
                 android:text="Get Started"
                 android:textColor="@color/white"
                 android:textSize="30dp" />
-
 
         </RelativeLayout>
 

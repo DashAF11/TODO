@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="6dp"
     tools:context=".frag_done">
 
     //this is just a container for list
@@ -23,7 +24,6 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/Recyclelistview_done"
             android:layout_marginTop="1dp"
-            android:padding="6dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="vertical"/>
@@ -31,6 +31,18 @@
         </android.support.v4.widget.SwipeRefreshLayout>
 
     </RelativeLayout>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/clearall"
+            android:background="@drawable/recycle_background_layout"
+            android:backgroundTint="@color/tabs"
+            android:textStyle="bold"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_margin="35dp"
+            android:src="@drawable/deletewhite"
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
     <RelativeLayout
         android:visibility="gone"

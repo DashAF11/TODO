@@ -2,9 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="75dp"
-    android:background="@drawable/recycle_background_layout"
-    android:padding="6dp"
     android:id="@+id/relative_delay"
+    android:background="@drawable/recycle_background_layout"
     android:layout_marginBottom="1dp">
 
     <TextView
@@ -14,10 +13,11 @@
         android:visibility="invisible"/>
 
     <TextView
+        android:layout_marginLeft="2dp"
+        android:layout_toRightOf="@+id/prefrence_color"
         android:layout_toLeftOf="@+id/tv_delayed_date"
-        android:layout_alignParentLeft="true"
         android:textColor="@color/button"
-        android:layout_marginBottom="10dp"
+        android:layout_above="@+id/textview12345"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:id="@+id/tv_delayed_name"
@@ -26,7 +26,17 @@
         android:lines= "2"
         android:textSize="17sp"/>
 
+    <RelativeLayout
+        android:id="@+id/prefrence_color"
+        android:background="@drawable/new_c"
+        android:layout_width="5dp"
+        android:layout_height="match_parent">
+    </RelativeLayout>
+
     <TextView
+        android:layout_marginBottom="3dp"
+        android:layout_marginLeft="2dp"
+        android:layout_toRightOf="@+id/prefrence_color"
         android:layout_alignParentBottom="true"
         android:text="Group : "
         android:id="@+id/textview12345"
@@ -34,6 +44,7 @@
         android:layout_height="wrap_content" />
 
     <TextView
+        android:layout_marginBottom="3dp"
         android:layout_alignParentBottom="true"
         android:layout_toRightOf="@+id/textview12345"
         android:id="@+id/catnamedelayed"
@@ -58,4 +69,13 @@
         android:textColor="@color/button"
         android:textStyle="bold"/>
 
-</RelativeLayout>
+    <TextView
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_delayed_pref"
+        android:textColor="@color/button"
+        android:textStyle="bold"/>
+
+ </RelativeLayout>
+

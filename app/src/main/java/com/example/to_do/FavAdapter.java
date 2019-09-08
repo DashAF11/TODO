@@ -1,18 +1,14 @@
 package com.example.to_do;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -36,7 +32,7 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.MyViewHolder>
 
     public class MyViewHolder extends RecyclerView.ViewHolder
     {
-        ImageView fav_id,btnicondelete;
+        ImageView fav_id;
         RelativeLayout btnnext;
         TextView tvid,tvname,count,countp;
 
@@ -49,7 +45,6 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.MyViewHolder>
             this.countp = (TextView) itemView.findViewById(R.id.count_pendingtaskfav);
             this.fav_id = (ImageView) itemView.findViewById(R.id.fav);
             this.btnnext = (RelativeLayout) itemView.findViewById(R.id.btnrelative_categoryonclick2);
-            this.btnicondelete=(ImageView)itemView.findViewById(R.id.cat_del);
             this.fav_id=(ImageView)itemView.findViewById(R.id.fav);
         }
     }
@@ -78,46 +73,6 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.MyViewHolder>
                 intent.putExtra("catId",holder.tvid.getText());
                 intent.putExtra("catName",holder.tvname.getText());
                 context.startActivity(intent);
-            }
-        });
-
-        holder.btnicondelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder((Activity) v.getContext());
-                alertDialog.setTitle("Delete this Item?");
-                alertDialog.setMessage("Are you sure you want to delete this, it may contain tasks!!!");
-                alertDialog.setIcon(R.drawable.icon);
-
-                alertDialog.setPositiveButton(
-                        "Delete",
-                        new DialogInterface.OnClickListener()
-                        {
-                            public void onClick(DialogInterface dialog, int which)
-                            {
-                                // Do the stuff..
-                                String id=holder.tvid.getText().toString();
-
-                                mydb = new DatabaseHelper(context);
-                                mydb.delete_category(id);
-
-                                mydb.deleteall_task(id);
-
-                                Intent intent=new Intent(context,Tabbed.class);
-                                ((Activity)context).finish();
-                                context.startActivity(intent);
-                            }
-                        }
-                );
-                alertDialog.setNegativeButton(
-                        "Cancel",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        });
-
-                alertDialog.show();
             }
         });
 

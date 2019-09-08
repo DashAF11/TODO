@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:background="@drawable/recycle_background_layout"
+        android:orientation="vertical"
+        android:padding="3dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:errorEnabled="true"
+        app:counterMaxLength="50"
+        app:counterEnabled="true">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/txtname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Task Name"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <LinearLayout
+        android:weightSum="2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_weight="1.7"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:errorEnabled="true">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/txtdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="SetDate" />
+
+    </android.support.design.widget.TextInputLayout>
+
+        <ImageView
+            android:layout_weight="0.3"
+            android:id="@+id/btn_dateicon"
+            android:layout_gravity="center"
+            android:src="@drawable/dateicon"
+            android:layout_width="0dp"
+            android:layout_height="44dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:weightSum="2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_weight="1.7"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:errorEnabled="true">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/txttime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="SetDate" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <ImageView
+            android:layout_weight="0.3"
+            android:id="@+id/btn_timeicon"
+            android:layout_gravity="center"
+            android:src="@drawable/timeicon"
+            android:layout_width="0dp"
+            android:layout_height="44dp" />
+
+    </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

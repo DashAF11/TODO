@@ -289,9 +289,9 @@ public class DatabaseHelper extends SQLiteOpenHelper
 
     public boolean deleteall_taskDONE ()
     {
-        String str="done";
+        String status1="done";
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("delete from "+TABLE_NAME2+" where "+COL_6_task+" = '"+str+"'  ");
+        db.execSQL("delete from "+TABLE_NAME2+" where "+COL_6_task+" ='"+status1+"'  ");
         return true;
     }
 

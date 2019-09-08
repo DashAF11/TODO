@@ -93,7 +93,6 @@ public class frag_done extends Fragment implements DoneAdapter.SendDataToFragmen
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
 
-                                mydb = new DatabaseHelper(context);
                                 mydb.deleteall_taskDONE();
                                 doneAdapter.notifyDataSetChanged();
                                 refresh();
